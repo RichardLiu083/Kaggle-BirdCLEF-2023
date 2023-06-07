@@ -1,6 +1,6 @@
 # Kaggle-HuBMAP-HPA-Hacking-the-Human-Body
-**2022/09/23 - Silver Medal - Top 4%**  
-[Competition Link](https://www.kaggle.com/competitions/hubmap-organ-segmentation)
+**2023/05/25 - Silver Medal - Top 5%**  
+[Competition Link](https://www.kaggle.com/competitions/birdclef-2023)
 ![image](https://github.com/RichardLiu083/Kaggle-HuBMAP-HPA-Hacking-the-Human-Body/blob/main/img/Rank.png)
 
 ## Solution
