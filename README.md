@@ -1,4 +1,4 @@
-# Kaggle-HuBMAP-HPA-Hacking-the-Human-Body
+# Kaggle - BirdCLEF 2023 - Identify bird calls in soundscapes
 **2023/05/25 - Silver Medal - Top 5%**  
 [Competition Link](https://www.kaggle.com/competitions/birdclef-2023)
 ![image](https://github.com/RichardLiu083/Kaggle-HuBMAP-HPA-Hacking-the-Human-Body/blob/main/img/Rank.png)
