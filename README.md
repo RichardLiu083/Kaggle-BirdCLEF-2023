@@ -4,10 +4,10 @@
 ![image](https://github.com/RichardLiu083/Kaggle-HuBMAP-HPA-Hacking-the-Human-Body/blob/main/img/Rank.png)
 
 ## Solution
-![image](https://github.com/RichardLiu083/Kaggle-HuBMAP-HPA-Hacking-the-Human-Body/blob/main/img/Inference%20Pipeline.png)
+
 
 ## Insight
-- Cut each soundfile for every 5 seconds, and convert to MelSpectrogram.
+- Split each soundfile by every 5 seconds, and convert to MelSpectrogram.
 - keep the aspect ratio of MelSpectrogram image is important.
 - Horizontal、Vertical flip will lead to performence drop. (since I use MelSpectrogram as input)
 - Use external dataset to build pretrained model. (previous birdcall competition)
