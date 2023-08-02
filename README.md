@@ -7,48 +7,44 @@
 ![image](https://github.com/RichardLiu083/Kaggle-HuBMAP-HPA-Hacking-the-Human-Body/blob/main/img/Inference%20Pipeline.png)
 
 ## Insight
-- Split the main task into two subtask (predict lung type and the others), which makes the model more stable while training and validation. 
-  Probably because lung type have weak signal and also noisy label.
-- CNN model is better than transformer model on lung type prediction.
-- Transformer model is better than CNN model while predicting the other types.
-- Stain Normalization can reduce the difference between HPA and Hubmap data.
-- Scale adjustment is crucial since Hubmap data have different pixel size compare to HPA data.
-- Doing Mosaic、Cutmix augmentation on lung type data will lead to performence drop.
-- Multi-classes model is worse than single class model.
+- Cut each soundfile for every 5 seconds, and convert to MelSpectrogram.
+- keep the aspect ratio of MelSpectrogram image is important.
+- Horizontal、Vertical flip will lead to performence drop. (since I use MelSpectrogram as input)
+- Use external dataset to build pretrained model. (previous birdcall competition)
+- GroupKFold (K=5) split by bird type.
+- Train each model for 5 fold, then use model soup to do combination.
+- Since there are some images without signal (label in soundfile level), so use soft-pseudo label for OOF, and repeat until no LB gain.
+- Use (hard label * 0.5 + soft pseudo label * 0.5) as new label for each new cycle training.
+- if number of samples in one species > 500, random choose 500；if < 50, random copy choose 50.
 
 ## Model
-- EfficientNet_b7 * 2 (Unet decoder)
-- Coat_medium (Daformer decoder)
-- Segformer_b5 * 2 (different image size)
-- Beit_base
+- EfficientNet_b0
+- EfficientNet_v2s
+- Convnext_v2_base
 
 ## Augmentation
-- Stain Normalization (helps a lot)
-- Mosaic
-- Cutmix
-- H、V Flip
-- HueSaturationValue
-- ShiftScaleRotate
-- CoarseDropout
-- Blur
+- SmallestMaxSize
+- RandomBrightnessContrast
+- mixup
 - GaussNoise
+- Cutout
+- CoarseDropout
+- ShiftScaleRotate
 
 ## Training
-- 100 epochs
-- lr 3e-4 for CNN, 6e-5 for Transformer
-- bce + dice loss
+- use nfnet_l0 to do soft pseudo label
+- image size = 128
+- 50 epochs
+- lr = 5e-4
+- batch size = 64
+- mixup prob= 0.65
+
 
 ## Validation
-- 5 fold 
-- only choose best model from validation
+- 5 fold.
+- if number of species < 5, put it into training dataset.
+- CMAP score have high correlation with LB score.
+
 
 ## Inference
-- TTA * 8 (Flip、Rotate)
-- choosing lower threshold for Hubmap data
-- 2 model (CNN) for lung type prediction, 4 model (Transformer) for the others. (total 6 model)
-
-## Top place method which I missed
-- Pseudo label on GTEX portal data.
-- Using full dataset to create one model (no validation).
-- SWA or model fusion in the same training pipeline.
-- Stain Normalization while inference (not only training).
+- 3 models weighted ensemble.
