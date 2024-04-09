@@ -3,9 +3,6 @@
 [Competition Link](https://www.kaggle.com/competitions/birdclef-2023)
 ![image](https://github.com/RichardLiu083/Kaggle-BirdCLEF-2023/blob/main/birdcall_rank.png)
 
-## Solution
-
-
 ## Insight
 - Split each soundfile by every 5 seconds, and convert to MelSpectrogram.
 - keep the aspect ratio of MelSpectrogram image is important.
